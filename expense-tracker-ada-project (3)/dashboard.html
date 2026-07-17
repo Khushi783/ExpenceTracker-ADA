@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ADA Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        
+<aside class="sidebar">
+    <div class="sidebar-logo">ExpenseTracker</div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" id="nav-dashboard">Dashboard</a>
+        <a href="search-demo.html" id="nav-search">Search Demo</a>
+        <a href="sorting-demo.html" id="nav-sorting">Sorting Demo</a>
+        <a href="algorithm-analysis.html" id="nav-algorithm-analysis">Algorithm Analysis</a>
+        <a href="reports.html" id="nav-reports">Reports</a>
+        <a href="profile.html" id="nav-profile">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+        <main class="main-content">
+            
+<header class="header">
+    <div class="header-title">
+        <h1>Dashboard</h1>
+        <p>Overview of your expenses</p>
+    </div>
+    <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span id="userName">User</span>
+    </div>
+</header>
+            
+<div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+    <div class="card">
+        <h3>Total Income</h3>
+        <div id="totalIncome" style="font-size: 1.5rem; font-weight: bold; color: var(--success);">₹0.00</div>
+    </div>
+    <div class="card">
+        <h3>Total Expenses</h3>
+        <div id="totalExpense" style="font-size: 1.5rem; font-weight: bold; color: var(--danger);">₹0.00</div>
+    </div>
+    <div class="card">
+        <h3 style="display: flex; justify-content: space-between; align-items: center;">Current Balance <button onclick="toggleEditBalance()" style="font-size: 0.75rem; padding: 0.15rem 0.5rem; background: var(--border-color); color: var(--text-main); border-radius: 4px; border: none; cursor: pointer;">Edit</button></h3>
+        <div id="currentBalanceContainer">
+            <div id="currentBalance" style="font-size: 1.5rem; font-weight: bold;">₹0.00</div>
+            <div id="editBalanceInline" style="display: none; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                <input type="number" id="inlineBalanceInput" step="0.01" style="width: 100px; padding: 0.25rem;">
+                <button onclick="saveInlineBalance()" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Save</button>
+                <button onclick="cancelInlineBalance()" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; background: #e2e8f0; color: #0f172a;">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Total Transactions</h3>
+        <div id="totalTransactions" style="font-size: 1.5rem; font-weight: bold;">0</div>
+    </div>
+    <div class="card">
+        <h3 style="display: flex; justify-content: space-between; align-items: center;">Monthly Budget <button onclick="toggleEditBudget()" style="font-size: 0.75rem; padding: 0.15rem 0.5rem; background: var(--border-color); color: var(--text-main); border-radius: 4px; border: none; cursor: pointer;">Edit</button></h3>
+        <div id="monthlyBudgetContainer">
+            <div id="monthlyBudgetDisplay" style="font-size: 1.5rem; font-weight: bold;">₹0.00</div>
+            <div id="budgetProgressContainer" style="margin-top: 0.5rem; background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                <div id="budgetProgressBar" style="background: var(--primary-color); height: 100%; width: 0%;"></div>
+            </div>
+            <div id="budgetWarning" style="color: var(--danger); font-size: 0.75rem; margin-top: 0.25rem; display: none;">Budget Exceeded!</div>
+        </div>
+        <div id="editBudgetInline" style="display: none; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+            <input type="number" id="inlineBudgetInput" step="0.01" style="width: 100px; padding: 0.25rem;">
+            <button onclick="saveInlineBudget()" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Save</button>
+            <button onclick="cancelInlineBudget()" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; background: #e2e8f0; color: #0f172a;">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2>Recent Expenses</h2>
+        <button onclick="document.getElementById('addExpenseModal').style.display='block'">+ Add Expense</button>
+    </div>
+    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+        <thead>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 0.75rem;">Title</th>
+                <th style="padding: 0.75rem;">Category</th>
+                <th style="padding: 0.75rem;">Date</th>
+                <th style="padding: 0.75rem;">Amount</th>
+                <th style="padding: 0.75rem;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="expensesList">
+            <!-- Populated via JS -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Add Expense Modal -->
+<div id="addExpenseModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+    <div class="card" style="width: 100%; max-width: 500px; margin: 10vh auto;">
+        <h2 style="margin-bottom: 1rem;">Add Expense</h2>
+        <form id="addExpenseForm">
+            <div style="margin-bottom: 1rem;">
+                <label>Title</label>
+                <input type="text" id="expTitle" required>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label>Amount</label>
+                <input type="number" id="expAmount" required>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label>Category</label>
+                <select id="expCategory">
+                    <option>Food</option>
+                    <option>Bills</option>
+                    <option>Shopping</option>
+                    <option>Travel</option>
+                    <option>Entertainment</option>
+                    <option>Education</option>
+                    <option>Medical</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label>Type</label>
+                <select id="expType">
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label>Date</label>
+                <input type="date" id="expDate" required>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit">Save</button>
+                <button type="button" style="background: #e2e8f0; color: #0f172a;" onclick="document.getElementById('addExpenseModal').style.display='none'">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+        
+        </main>
+    </div>
+    <script src="js/session.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        const navEl = document.getElementById('nav-dashboard'); if (navEl) navEl.classList.add('active');
+    </script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

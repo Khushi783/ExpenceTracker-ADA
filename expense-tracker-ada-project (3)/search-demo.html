@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Algorithm Demo - ADA Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        
+<aside class="sidebar">
+    <div class="sidebar-logo">ExpenseTracker</div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" id="nav-dashboard">Dashboard</a>
+        <a href="search-demo.html" id="nav-search">Search Demo</a>
+        <a href="sorting-demo.html" id="nav-sorting">Sorting Demo</a>
+        <a href="algorithm-analysis.html" id="nav-algorithm-analysis">Algorithm Analysis</a>
+        <a href="reports.html" id="nav-reports">Reports</a>
+        <a href="profile.html" id="nav-profile">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+        <main class="main-content">
+            
+<header class="header">
+    <div class="header-title">
+        <h1>Search Algorithm Demo</h1>
+        <p>Visualize Linear vs Binary Search side-by-side</p>
+    </div>
+    <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span id="userName">User</span>
+    </div>
+</header>
+            
+<div class="card" style="margin-bottom: 2rem;">
+    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+        <select id="searchField" style="width: 150px;">
+            <option value="title">Title</option>
+            <option value="category">Category</option>
+        </select>
+        <input type="text" id="searchQuery" placeholder="Search...">
+        <button onclick="startSearch()">Search Both</button>
+        <label style="display:flex; align-items:center; gap:0.5rem;"><input type="checkbox" id="learningMode"> Learning Mode</label>
+    </div>
+</div>
+
+<div id="learningControls" style="display:none; margin-bottom: 2rem; text-align: center;">
+    <button id="nextStepBtn" onclick="nextSearchStep()" style="font-size: 1.2rem; padding: 0.75rem 2rem;">Next Step</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    
+    <!-- Linear Search Section -->
+    <div class="card" id="linearVisualization">
+        <h3 style="margin-bottom: 1rem;">Linear Search <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Unsorted Data)</span></h3>
+        <div id="linearArray" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; min-height: 100px; align-content: flex-start;">
+            <!-- Generated via JS -->
+        </div>
+        <div class="stats-box" style="margin-top: 1rem; background: var(--bg-color); padding: 1rem; border-radius: 0.5rem;">
+            <div style="margin-bottom: 0.5rem;">Comparisons: <strong id="linearComps" style="font-size: 1.25rem;">0</strong></div>
+            <div style="margin-bottom: 0.5rem;">Execution Time: <strong id="linearTime" style="font-size: 1.25rem;">0 ms</strong></div>
+            <div style="font-size: 0.875rem; color: var(--text-muted);">Complexity: Best O(1), Avg O(n), Worst O(n)</div>
+        </div>
+    </div>
+    
+    <!-- Binary Search Section -->
+    <div class="card" id="binaryVisualization">
+        <h3 style="margin-bottom: 1rem;">Binary Search <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Sorted Data)</span></h3>
+        <div id="binaryArray" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; min-height: 100px; align-content: flex-start;">
+            <!-- Generated via JS -->
+        </div>
+        <div class="stats-box" style="margin-top: 1rem; background: var(--bg-color); padding: 1rem; border-radius: 0.5rem;">
+            <div style="margin-bottom: 0.5rem;">Comparisons: <strong id="binaryComps" style="font-size: 1.25rem;">0</strong></div>
+            <div style="margin-bottom: 0.5rem;">Execution Time: <strong id="binaryTime" style="font-size: 1.25rem;">0 ms</strong></div>
+            <div style="font-size: 0.875rem; color: var(--text-muted);">Complexity: Best O(1), Avg O(log n), Worst O(log n)</div>
+        </div>
+    </div>
+    
+</div>
+
+        </main>
+    </div>
+    <script src="js/session.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        const navEl = document.getElementById('nav-search'); if (navEl) navEl.classList.add('active');
+    </script>
+    <script src="js/search.js"></script>
+</body>
+</html>

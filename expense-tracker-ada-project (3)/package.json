@@ -1,0 +1,14 @@
+{
+  "name": "expense-tracker-html",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "serve . -p 3000",
+    "build": "mkdir -p dist && cp -r *.html css js assets dist/",
+    "preview": "serve dist -p 3000",
+    "start": "serve dist -p 3000"
+  },
+  "dependencies": {
+    "serve": "^14.2.6"
+  }
+}

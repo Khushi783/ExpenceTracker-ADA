@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports & Charts - ADA Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        
+<aside class="sidebar">
+    <div class="sidebar-logo">ExpenseTracker</div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" id="nav-dashboard">Dashboard</a>
+        <a href="search-demo.html" id="nav-search">Search Demo</a>
+        <a href="sorting-demo.html" id="nav-sorting">Sorting Demo</a>
+        <a href="algorithm-analysis.html" id="nav-algorithm-analysis">Algorithm Analysis</a>
+        <a href="reports.html" id="nav-reports">Reports</a>
+        <a href="profile.html" id="nav-profile">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+        <main class="main-content">
+            
+<header class="header">
+    <div class="header-title">
+        <h1>Reports & Charts</h1>
+        <p>Visualizing your financial data</p>
+    </div>
+    <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span id="userName">User</span>
+    </div>
+</header>
+            
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <div class="card">
+        <h3>Expense by Category</h3>
+        <canvas id="categoryChart" style="margin-top: 1rem;"></canvas>
+    </div>
+    <div class="card">
+        <h3>Income vs Expense</h3>
+        <canvas id="typeChart" style="margin-top: 1rem;"></canvas>
+    </div>
+</div>
+
+        </main>
+    </div>
+    <script src="js/session.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        const navEl = document.getElementById('nav-reports'); if (navEl) navEl.classList.add('active');
+    </script>
+    <script src="js/reports.js"></script>
+</body>
+</html>

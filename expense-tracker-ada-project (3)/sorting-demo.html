@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Demo - ADA Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        
+<aside class="sidebar">
+    <div class="sidebar-logo">ExpenseTracker</div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" id="nav-dashboard">Dashboard</a>
+        <a href="search-demo.html" id="nav-search">Search Demo</a>
+        <a href="sorting-demo.html" id="nav-sorting">Sorting Demo</a>
+        <a href="algorithm-analysis.html" id="nav-algorithm-analysis">Algorithm Analysis</a>
+        <a href="reports.html" id="nav-reports">Reports</a>
+        <a href="profile.html" id="nav-profile">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+        <main class="main-content">
+            
+<header class="header">
+    <div class="header-title">
+        <h1>Sorting Algorithm Demo</h1>
+        <p>Visualize Bubble Sort on your expenses</p>
+    </div>
+    <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span id="userName">User</span>
+    </div>
+</header>
+            
+<div class="card" style="margin-bottom: 2rem;">
+    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+        <select id="sortBy" style="width: 200px;">
+            <option value="amount">Amount</option>
+            <option value="date">Date</option>
+            <option value="title">Title</option>
+        </select>
+        <select id="sortOrder" style="width: 150px;">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <button onclick="startSort()">Start Sort</button>
+        <label style="display:flex; align-items:center; gap:0.5rem;"><input type="checkbox" id="sortLearningMode"> Learning Mode</label>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+    <div class="card" id="sortVisualization" style="height: 400px; display: flex; align-items: flex-end; gap: 4px; padding: 1rem;">
+        <!-- Generated via JS -->
+    </div>
+    
+    <div class="card">
+        <h3 style="margin-bottom: 1rem;">Sorting Statistics</h3>
+        <div id="sortLearningControls" style="display:none; margin-bottom: 1rem;">
+            <button id="nextSortStepBtn" onclick="nextSortStep()">Next Step</button>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.875rem; color: var(--text-muted);">Current Step</div>
+            <div id="sortStatus" style="font-weight: bold;">Ready</div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.875rem; color: var(--text-muted);">Comparisons</div>
+            <div id="sortComps" style="font-weight: bold; font-size: 1.5rem;">0</div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.875rem; color: var(--text-muted);">Swaps</div>
+            <div id="sortSwaps" style="font-weight: bold; font-size: 1.5rem;">0</div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.875rem; color: var(--text-muted);">Execution Time</div>
+            <div id="sortTime" style="font-weight: bold; font-size: 1.5rem;">0 ms</div>
+        </div>
+    </div>
+</div>
+
+        </main>
+    </div>
+    <script src="js/session.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        const navEl = document.getElementById('nav-sorting'); if (navEl) navEl.classList.add('active');
+    </script>
+    <script src="js/sorting.js"></script>
+</body>
+</html>

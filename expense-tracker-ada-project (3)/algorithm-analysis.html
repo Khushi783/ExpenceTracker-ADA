@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Analysis - ADA Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        
+<aside class="sidebar">
+    <div class="sidebar-logo">ExpenseTracker</div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" id="nav-dashboard">Dashboard</a>
+        <a href="search-demo.html" id="nav-search">Search Demo</a>
+        <a href="sorting-demo.html" id="nav-sorting">Sorting Demo</a>
+        <a href="algorithm-analysis.html" id="nav-algorithm-analysis">Algorithm Analysis</a>
+        <a href="reports.html" id="nav-reports">Reports</a>
+        <a href="profile.html" id="nav-profile">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+</aside>
+        <main class="main-content">
+            
+<header class="header">
+    <div class="header-title">
+        <h1>Algorithm Analysis</h1>
+        <p>Race Search Algorithms against each other</p>
+    </div>
+    <div class="user-profile-btn" onclick="window.location.href='profile.html'">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span id="userName">User</span>
+    </div>
+</header>
+            
+<div class="card" style="margin-bottom: 2rem;">
+    <p style="margin-bottom: 1rem;">Run Linear Search and Binary Search on the same data simultaneously to see which performs better.</p>
+<div style="margin-bottom: 1rem; padding: 1rem; background: #fffbeb; border: 1px solid #fde68a; border-radius: 0.5rem; color: #92400e; font-size: 0.875rem;">
+    <strong>Tip to make Linear Search win:</strong> Search for an expense title that you added <em>first</em> (e.g., at the top of your list or index 0). Linear Search will find it on the very first comparison (O(1) best case), while Binary Search will still take time splitting the sorted array. For everything else, Binary Search is generally faster!
+</div>
+    <div style="display: flex; gap: 1rem;">
+        <input type="text" id="raceQuery" placeholder="Enter an expense title...">
+        <button onclick="startRace()">Run Race</button>
+    </div>
+</div>
+
+<div id="raceResults" style="display: none;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+        <div class="card" id="linearResultCard">
+            <h3 style="margin-bottom: 1rem;">Linear Search <span style="font-size:0.75rem; background:#f1f5f9; padding: 2px 6px; border-radius:4px;">O(n)</span></h3>
+            <p>Comparisons: <strong id="raceLinearComps">0</strong></p>
+            <p>Execution Time: <strong id="raceLinearTime">0 ms</strong></p>
+            <p id="raceLinearFound" style="margin-top:0.5rem;"></p>
+        </div>
+        
+        <div class="card" id="binaryResultCard">
+            <h3 style="margin-bottom: 1rem;">Binary Search <span style="font-size:0.75rem; background:#f1f5f9; padding: 2px 6px; border-radius:4px;">O(log n)</span></h3>
+            <p>Comparisons: <strong id="raceBinaryComps">0</strong></p>
+            <p>Execution Time: <strong id="raceBinaryTime">0 ms</strong></p>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">Pre-sorting Time: <span id="raceSortTime">0 ms</span></p>
+            <p id="raceBinaryFound" style="margin-top:0.5rem;"></p>
+        </div>
+    </div>
+    
+    <div class="card" style="background: #eff6ff; border-color: #bfdbfe;">
+        <h3>Conclusion</h3>
+        <p id="raceConclusion" style="margin-top: 0.5rem;"></p>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 2rem;">
+    <h3 style="margin-bottom: 1rem;">Comparison Table</h3>
+    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+        <thead>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 0.75rem;">Feature</th>
+                <th style="padding: 0.75rem;">Linear Search</th>
+                <th style="padding: 0.75rem;">Binary Search</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 0.75rem;">Best Case</td>
+                <td style="padding: 0.75rem;">O(1)</td>
+                <td style="padding: 0.75rem;">O(1)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 0.75rem;">Average Case</td>
+                <td style="padding: 0.75rem;">O(n)</td>
+                <td style="padding: 0.75rem; color: var(--success); font-weight: bold;">O(log n)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 0.75rem;">Worst Case</td>
+                <td style="padding: 0.75rem;">O(n)</td>
+                <td style="padding: 0.75rem; color: var(--success); font-weight: bold;">O(log n)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 0.75rem;">Requires Sorting</td>
+                <td style="padding: 0.75rem;">No</td>
+                <td style="padding: 0.75rem;">Yes</td>
+            </tr>
+            <tr>
+                <td style="padding: 0.75rem;">Faster for large datasets</td>
+                <td style="padding: 0.75rem;">No</td>
+                <td style="padding: 0.75rem; color: var(--success); font-weight: bold;">Yes</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+        </main>
+    </div>
+    <script src="js/session.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        const navEl = document.getElementById('nav-algorithm-analysis'); if (navEl) navEl.classList.add('active');
+    </script>
+    <script src="js/analysis.js"></script>
+</body>
+</html>
