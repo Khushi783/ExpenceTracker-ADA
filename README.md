@@ -11,7 +11,7 @@ Bubble Sort: Arranges expense records in ascending order by repeatedly comparing
 
 The project also includes interactive visualizations of these algorithms, allowing users to observe each step of their execution and compare their performance based on the number of comparisons and execution time.
 
-Objectives
+Objectives:
 Develop a user-friendly Expense Tracker application.
 Store and manage expense records efficiently.
 Implement Linear Search for sequential searching.
@@ -20,6 +20,7 @@ Implement Bubble Sort for sorting expense records.
 Compare the performance of searching algorithms.
 Demonstrate the practical application of ADA concepts.
 Provide an educational and interactive learning platform.
-Conclusion
+
+Conclusion:
 
 The Expense Tracker successfully combines personal finance management with the concepts of Analysis of Design and Algorithms. By implementing Linear Search, Binary Search, and Bubble Sort, the application not only helps users manage expenses but also demonstrates how different algorithms perform in real-world scenarios. The project enhances understanding of algorithm efficiency while providing a practical, responsive, and easy-to-use expense management system suitable for academic learning and project demonstration.
